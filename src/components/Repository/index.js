@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import Card from '../Card';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../../store/modules/favorites/actions';
 
 const Repository = ({
   id,
@@ -16,6 +21,8 @@ const Repository = ({
   const [isFav, setIsFav] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (navigation.state.key === 'HomeScreen') {
       setIsFav(false);
@@ -24,14 +31,25 @@ const Repository = ({
     }
   }, [navigation.state.key]);
 
-  function addFavorite() {
+  function handleAddFavorite() {
     setIsFav(true);
-    console.log('adicionou');
+
+    let favorite = {
+      id,
+      name,
+      description,
+      totalStars,
+      totalForks,
+      totalOpenedIssues,
+      assignableUsersImages,
+    };
+
+    dispatch(addFavorite(favorite));
   }
 
-  function removeFavorite() {
+  function handleRemoveFavorite() {
     setIsFav(false);
-    console.log('removeu');
+    dispatch(removeFavorite(id));
   }
 
   //   console.log(assignableUsersImages.map(i => i.node.avatarUrl));
@@ -43,14 +61,16 @@ const Repository = ({
           {name}
         </Text>
         {!isFav ? (
-          <TouchableOpacity style={styles.button} onPress={addFavorite}>
+          <TouchableOpacity style={styles.button} onPress={handleAddFavorite}>
             <Text>
               {/* <Icon name="star" size={15} /> */}
               Favoritar
             </Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={removeFavorite}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleRemoveFavorite}>
             <Text>
               {/* <Icon name="star" size={15} /> */}
               Remover
