@@ -17,7 +17,6 @@ const HomeScreen = props => {
   }, [dispatch, props.repositories]);
 
   const repositories = useSelector(state => state.repositories);
-  console.log(repositories);
   return (
     <SafeAreaView>
       {props.repositories.loading ? (
@@ -25,7 +24,7 @@ const HomeScreen = props => {
       ) : (
         <FlatList
           style={styles.list}
-          data={props.repositories.search.edges}
+          data={repositories}
           renderItem={({item}) => {
             const {
               id,
@@ -45,7 +44,6 @@ const HomeScreen = props => {
                 totalForks={forks.totalCount}
                 totalOpenedIssues={issues.totalCount}
                 assignableUsersImages={assignableUsers.edges}
-                navigation={props.navigation}
               />
             );
           }}
