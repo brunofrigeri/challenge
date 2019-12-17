@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {SafeAreaView, Text, FlatList, StyleSheet} from 'react-native';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import Repository from '../components/Repository';
 
+import {addRepositories} from '../store/modules/repositories/actions';
+
 const HomeScreen = props => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!props.repositories.loading) {
+      dispatch(addRepositories(props.repositories.search.edges));
+    }
+  }, [dispatch, props.repositories]);
+
+  const repositories = useSelector(state => state.repositories);
   return (
     <SafeAreaView>
       {props.repositories.loading ? (
@@ -12,7 +24,7 @@ const HomeScreen = props => {
       ) : (
         <FlatList
           style={styles.list}
-          data={props.repositories.search.edges}
+          data={repositories}
           renderItem={({item}) => {
             const {
               id,
@@ -32,7 +44,6 @@ const HomeScreen = props => {
                 totalForks={forks.totalCount}
                 totalOpenedIssues={issues.totalCount}
                 assignableUsersImages={assignableUsers.edges}
-                navigation={props.navigation}
               />
             );
           }}
