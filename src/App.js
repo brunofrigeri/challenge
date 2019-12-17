@@ -1,8 +1,15 @@
 import React from 'react';
+import {ApolloProvider} from 'react-apollo';
 
 import Routes from './routes';
+import client from './services/apollo';
 
 const App = () => {
-  return <Routes />;
+  return (
+    <ApolloProvider client={client}>
+      <Routes />
+    </ApolloProvider>
+  );
+};
 
 export default App;
