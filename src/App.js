@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
 
-const App: () => React$Node = () => {
-  return <Text>Olá</Text>;
-};
+import Routes from './routes';
+
+const App = () => {
+  return <Routes />;
 
 export default App;
