@@ -1,23 +1,44 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, Text, FlatList, StyleSheet} from 'react-native';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
+import Repository from '../components/Repository';
 
 const HomeScreen = props => {
-  console.log(props.repositories);
   return (
     <SafeAreaView>
       {props.repositories.loading ? (
         <Text>Carregando ...</Text>
       ) : (
-        props.repositories.search.edges.map((repo, idx) => (
-          <View key={idx}>
-            <Text>{repo.node.id}</Text>
-            <Text>{repo.node.nameWithOwner}</Text>
-          </View>
-        ))
+        <FlatList
+          style={styles.list}
+          data={props.repositories.search.edges}
+          renderItem={({item}) => {
+            const {
+              id,
+              description,
+              nameWithOwner,
+              stargazers,
+              issues,
+              forks,
+              assignableUsers,
+            } = item.node;
+            return (
+              <Repository
+                id={id}
+                name={nameWithOwner}
+                description={description}
+                totalStars={stargazers.totalCount}
+                totalForks={forks.totalCount}
+                totalOpenedIssues={issues.totalCount}
+                assignableUsersImages={assignableUsers.edges}
+                navigation={props.navigation}
+              />
+            );
+          }}
+          keyExtractor={item => item.node.id}
+        />
       )}
-      <Text>HOME</Text>
     </SafeAreaView>
   );
 };
@@ -53,5 +74,15 @@ const RepositoriesQuery = gql`
     }
   }
 `;
+
+const styles = StyleSheet.create({
+  list: {
+    margin: 15,
+    borderRadius: 9,
+    borderWidth: 1,
+    borderColor: '#d1d5da',
+    borderStyle: 'solid',
+  },
+});
 
 export default graphql(RepositoriesQuery, {name: 'repositories'})(HomeScreen);
