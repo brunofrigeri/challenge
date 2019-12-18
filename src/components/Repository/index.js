@@ -6,8 +6,8 @@ card list
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-// import Icon from 'react-native-vector-icons/Octicons';
-// Icon.loadFont();
+import Icon from 'react-native-vector-icons/Octicons';
+Icon.loadFont();
 import Button from '../Button';
 import Card from '../Card';
 import {
@@ -59,7 +59,7 @@ const Repository = ({
     <View>
       <TouchableOpacity onPress={() => setOpen(!open)} style={styles.container}>
         <View style={styles.titleContainer}>
-          {/* <Icon name="repo" size={20} color="#000" /> */}
+          <Icon name="repo" size={20} color="#000" />
           <Text style={styles.title}>{name}</Text>
         </View>
         <Button
@@ -74,7 +74,7 @@ const Repository = ({
           fav={fav}
         />
         <Text style={styles.stars}>
-          {/* <Icon name="star" size={15} /> */}
+          <Icon name="star" size={15} />
           {totalStars} stars
         </Text>
       </TouchableOpacity>
@@ -129,20 +129,3 @@ const styles = StyleSheet.create({
 });
 
 export default Repository;
-
-// {!fav ? (
-//   <TouchableOpacity
-//     style={styles.addButton}
-//     onPress={handleAddFavorite}>
-//     <Text>
-//       {/* <Icon name="star" size={15} /> */}
-//       Favoritar
-//     </Text>
-//   </TouchableOpacity>
-// ) : (
-//   <TouchableOpacity
-//     style={styles.removeButton}
-//     onPress={handleRemoveFavorite}>
-//     <Text>Remover</Text>
-//   </TouchableOpacity>
-// )}

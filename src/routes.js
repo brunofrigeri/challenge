@@ -5,9 +5,9 @@ import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom
 
 import HomeScreen from './pages/HomeScreen';
 import FavoriteScreen from './pages/FavoriteScreen';
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-// Icon.loadFont();
+Icon.loadFont();
 
 // Variable that receive the Tab Navigator initializer
 const mainNav = createMaterialBottomTabNavigator(
@@ -18,7 +18,7 @@ const mainNav = createMaterialBottomTabNavigator(
         // Here we add an icon on tab Home
         tabBarIcon: ({tintColor}) => (
           <View>
-            {/* <Icon style={[{color: tintColor}]} size={25} name={'ios-home'} /> */}
+            <Icon style={[{color: tintColor}]} size={25} name={'ios-home'} />
           </View>
         ),
       },
@@ -28,7 +28,7 @@ const mainNav = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: ({tintColor}) => (
           <View>
-            {/* <Icon style={[{color: tintColor}]} size={25} name={'ios-star'} /> */}
+            <Icon style={[{color: tintColor}]} size={25} name={'ios-star'} />
           </View>
         ),
       },

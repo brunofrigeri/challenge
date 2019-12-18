@@ -1,12 +1,17 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Octicons';
+Icon.loadFont();
 
 const Button = ({text, onPress, fav}) => {
   return (
     <TouchableOpacity
       style={fav ? styles.removeButton : styles.addButton}
       onPress={() => onPress()}>
-      <Text>{text}</Text>
+      <Text>
+        <Icon name="star" size={15} />
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };
