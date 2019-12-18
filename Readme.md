@@ -5,6 +5,18 @@ Este é um desafio para testar seus conhecimentos em javascript, React-Native e 
 # Como usar
 
 - Basta que seja utilizado o comando `react-native run-ios` ou `react-native run-android`.
+- É necessário que seja criada um `dotenv` file com a seguinte linha `PRIVATE_KEY=MINHA_PRIVATE_KEY`
+  - Para saber como gerar uma private key acesse https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+  - Escopos a serem marcados na criação da key:
+    - user
+    - public_repo
+    - repo
+    - repo_deployment
+    - repo:status
+    - read:repo_hook
+    - read:org
+    - read:public_key
+    - read:gpg_key
 
 # Aplicação
 

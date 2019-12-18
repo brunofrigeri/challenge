@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 // import Icon from 'react-native-vector-icons/Octicons';
 // Icon.loadFont();
-
+import Button from '../Button';
 import Card from '../Card';
 import {
   addFavorite,
@@ -62,22 +62,17 @@ const Repository = ({
           {/* <Icon name="repo" size={20} color="#000" /> */}
           <Text style={styles.title}>{name}</Text>
         </View>
-        {!fav ? (
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={handleAddFavorite}>
-            <Text>
-              {/* <Icon name="star" size={15} /> */}
-              Favoritar
-            </Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={styles.removeButton}
-            onPress={handleRemoveFavorite}>
-            <Text>Remover</Text>
-          </TouchableOpacity>
-        )}
+        <Button
+          text={!fav ? 'Favoritar' : 'Remover'}
+          onPress={() => {
+            if (!fav) {
+              handleAddFavorite();
+            } else {
+              handleRemoveFavorite();
+            }
+          }}
+          fav={fav}
+        />
         <Text style={styles.stars}>
           {/* <Icon name="star" size={15} /> */}
           {totalStars} stars
@@ -131,23 +126,23 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     color: '#586069',
   },
-  addButton: {
-    padding: 10,
-    fontSize: 12,
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: '#dcdc',
-    borderStyle: 'solid',
-  },
-  removeButton: {
-    padding: 10,
-    fontSize: 12,
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: '#dcdc',
-    borderStyle: 'solid',
-    backgroundColor: '#e75f5f',
-  },
 });
 
 export default Repository;
+
+// {!fav ? (
+//   <TouchableOpacity
+//     style={styles.addButton}
+//     onPress={handleAddFavorite}>
+//     <Text>
+//       {/* <Icon name="star" size={15} /> */}
+//       Favoritar
+//     </Text>
+//   </TouchableOpacity>
+// ) : (
+//   <TouchableOpacity
+//     style={styles.removeButton}
+//     onPress={handleRemoveFavorite}>
+//     <Text>Remover</Text>
+//   </TouchableOpacity>
+// )}
