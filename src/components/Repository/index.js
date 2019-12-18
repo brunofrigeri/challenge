@@ -1,3 +1,8 @@
+/* This component is responsable for each repository, what means
+that each one repository enters in here and carry information like
+name, description, url, totalStarsCount, etc, to build the Repository
+card list
+*/
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
@@ -19,6 +24,7 @@ const Repository = ({
   totalStars,
   totalForks,
   totalOpenedIssues,
+  url,
   assignableUsersImages,
 }) => {
   const [open, setOpen] = useState(false);
@@ -28,6 +34,7 @@ const Repository = ({
     state.repositories.filter(repo => repo.node.id === id),
   ).map(repo => repo.node.isFav)[0];
 
+  // Function responsable for adding a new favorite in favorites list
   function handleAddFavorite() {
     let favorite = {
       id,
@@ -43,12 +50,12 @@ const Repository = ({
     dispatch(updateRepository(id, true));
   }
 
+  // Function responsable for removing a respective favorite in favorites list
   function handleRemoveFavorite() {
     dispatch(removeFavorite(id));
     dispatch(updateRepository(id, false));
   }
 
-  //   console.log(assignableUsersImages.map(i => i.node.avatarUrl));
   return (
     <View>
       <TouchableOpacity onPress={() => setOpen(!open)} style={styles.container}>
@@ -74,7 +81,7 @@ const Repository = ({
         )}
         <Text style={styles.stars}>
           <Icon name="star" size={15} />
-          {totalStars}
+          {totalStars} stars
         </Text>
       </TouchableOpacity>
       {open ? (
@@ -83,6 +90,7 @@ const Repository = ({
           forks={totalForks}
           issues={totalOpenedIssues}
           images={assignableUsersImages}
+          url={url}
         />
       ) : null}
     </View>
@@ -106,7 +114,6 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 1,
-    // display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
   },

@@ -10,7 +10,6 @@ const httpLink = new HttpLink({
 let middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      //Take off the hash
       authorization: 'Bearer 6a4d72588c8675b4448fac278e6e5948d6d03265',
     },
   });

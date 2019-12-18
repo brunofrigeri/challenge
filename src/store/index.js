@@ -1,3 +1,4 @@
+// Initialize redux and createStore with all reducers in hand
 import {createStore} from 'redux';
 import rootReducer from './modules/rootReducer';
 

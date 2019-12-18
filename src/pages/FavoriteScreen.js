@@ -1,3 +1,6 @@
+/* Screen responsable for list the favorites and tell to the user
+the quantity of favorited repositories
+*/
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {SafeAreaView, Text, StyleSheet, FlatList, View} from 'react-native';
