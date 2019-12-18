@@ -10,7 +10,7 @@ const httpLink = new HttpLink({
 let middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      authorization: 'Bearer 6a4d72588c8675b4448fac278e6e5948d6d03265',
+      authorization: 'Bearer bb939c837dfe3ea9da9cdd52a6f16693fd54d3a5',
     },
   });
   return forward(operation);
